@@ -1,48 +1,29 @@
-import desenhos as d
-from random import choice
-
-lista_palavras = list()
-arquivo = open('Palavras.txt', 'r') 
-for linha in arquivo: 
-    palavra = linha.strip()
-    lista_palavras.append(palavra)
+import jogo as j
+def mostrar_menu():
+    print("="*30)
+    print(" " * 7 + "JOGO DA FORCA")
+    print("="*30)
+    print("\n1 - JOGAR")
+    print("2 - SCORE")
+    print("3 - SAIR\n")
+    print("="*30)
     
-palavra_sorteada = choice(lista_palavras)
-
-for x in range(50):
-    print()
-
-digitadas = []
-acertos   = []
-erros     = 0
-
+    
 while True:
+    mostrar_menu()
+    opcao  = int(input("Escolha uma opção (1/2/3): "))
     
-    adivinha = d.imprimir_palavra_secreta(palavra_sorteada, acertos)
-
-    # * CONDIÇÃO DE VITORIA
-    if adivinha == palavra_sorteada:
-        print('Você acertou!')
+    if opcao == 1:
+        print('Iniciando o jogo...')
+        j.jogar()
+        input('Digite qual quer tecla para continuar...')
+    
+    elif  opcao == 2:
+        print('Mostrar score!')
+        
+    elif opcao == 3: 
+        print('Encerrando jogo')
         break
-     
-    # * TENTATIVAS
-    tentativa = input('\nDigite uma letra: ').lower().strip()
-    if tentativa in digitadas:
-        print('Você já usou essa letra')
-        continue
+    
     else: 
-        digitadas += tentativa
-        if tentativa in palavra_sorteada:
-            acertos += tentativa
-        else:
-            erros += 1
-            print('Você errou!')
-    
-
-    d.desenhar_forca(erros)
-    
-    # * CONDIÇÃO DE FIM DE JOGO 
-    if erros == 6:
-        print('Gamer Over!')
-        print(f'A palavra correta era {palavra_sorteada}.')
-        break    
+        print('Opção inválida! Tente novamente.')
