@@ -1,5 +1,6 @@
 import desenhos as d
 from random import choice
+import bd
 
 def jogar():
     lista_palavras = list()
@@ -16,6 +17,8 @@ def jogar():
     digitadas = []
     acertos   = []
     erros     = 0
+    
+    nome = input('Quem esta jogando?')
 
     while True:
         
@@ -40,10 +43,12 @@ def jogar():
                 print('Você errou!')
         
 
-        d.desenhar_forca(erros)
+        score = d.desenhar_forca(erros)
         
         # * CONDIÇÃO DE FIM DE JOGO 
         if erros == 6:
             print('Gamer Over!')
             print(f'A palavra correta era {palavra_sorteada}.')
             break    
+    
+    bd.inserir_dados(nome,score)
